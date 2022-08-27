@@ -65,6 +65,8 @@ class PowerPusher:
         self.bus = bus
         self.address = address
 
+        self.logger = logging.getLogger(self..__class__.__name__)
+
         self._setup_pins()
 
     def __enter__(self):
@@ -154,9 +156,9 @@ class PowerPusher:
         # get original value
         value0 = self.bus.read_byte_data(self.address, OLATA)
 
-        logger = logging.getLogger('PowerPusher._power_hold')
+        logger = self.logger.getChild('_power_hold')
 
-        logger.debug("value0 = %r", value0)
+        logger.debug("value0 = %02x", value0)
 
         if index in range(3):
             bitmask = index + 1
@@ -165,15 +167,15 @@ class PowerPusher:
         else:
             raise ValueError(f'%r is an invalid index')
 
-        logger.debug("bitmask = %r", bitmask)
+        logger.debug("bitmask = %02x", bitmask)
 
         # calculate the appropriate bits for "enable"
         value_enable = (value0 | bitmask)
         # calculate the appropriate bits for "disable"
         value_disable = (value0 & ~bitmask)
 
-        logger.debug("value_enable = %r", value_enable)
-        logger.debug("value_disable = %r", value_disable)
+        logger.debug("value_enable = %02x", value_enable)
+        logger.debug("value_disable = %02x", value_disable)
 
         # write to the output (start the hold)
         logger.debug("enabling")
