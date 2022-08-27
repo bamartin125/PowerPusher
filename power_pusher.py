@@ -1,5 +1,6 @@
 from smbus2 import SMBus
 import click
+import time
 
 
 DEFAULT_POWER_ON_SECONDS = 0.5
