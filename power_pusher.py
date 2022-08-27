@@ -64,10 +64,10 @@ class PowerPusher:
         self.address = address
 
     def __enter__(self):
-        return _SynchronousSession(self)
+        return PowerPusher._SynchronousSession(self)
 
     def __aenter__(self):
-        return _AsynchronousSession(self)
+        return PowerPusher._AsynchronousSession(self)
 
     def __exit__(self, exc_type, exc_value, traceback):
         pass
@@ -106,14 +106,14 @@ class PowerPusher:
         def __init__(self, pusher):
             self._pusher = pusher
 
-    class _AsynchronousSession(_Session):
+    class _AsynchronousSession(PowerPusher._Session):
         async def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             raise NotImplementedError()
 
         async def power_off(self, *, index, hold_seconds=DEFAULT_POWER_OFF_SECONDS,):
             raise NotImplementedError()
 
-    class _SynchronousSession(_Session):
+    class _SynchronousSession(PowerPusher._Session):
         def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             return self._pusher.power_on(
                 index=index,
