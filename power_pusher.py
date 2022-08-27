@@ -65,7 +65,7 @@ class PowerPusher:
         self.bus = bus
         self.address = address
 
-        self.logger = logging.getLogger(self..__class__.__name__)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
         self._setup_pins()
 
