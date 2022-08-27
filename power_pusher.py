@@ -65,6 +65,8 @@ class PowerPusher:
         self.bus = bus
         self.address = address
 
+        self._setup_pins()
+
     def __enter__(self):
         return PowerPusher._SynchronousSession(self)
 
