@@ -224,7 +224,7 @@ def cli():
 @click.option(
     '--hold-seconds',
     type=float,
-    help='how many seconds to "hold the power button down"',A
+    help='how many seconds to "hold the power button down"',
     required=True,
 )
 def cli_power_hold(index, hold_seconds):
