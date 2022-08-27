@@ -114,6 +114,12 @@ class PowerPusher:
             raise NotImplementedError()
 
     class _SynchronousSession(_Session):
+        def power_hold(self, *, index, hold_seconds):
+            return self._pusher.power_hold(
+                index=index,
+                hold_seconds=hold_seconds,
+            )
+
         def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             return self._pusher.power_on(
                 index=index,
