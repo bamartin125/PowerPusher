@@ -159,7 +159,7 @@ class PowerPusher:
         self.bus.write_byte_data(self.address, OLATA, value_enable,)
 
         # call the waiter while we hold down
-        waiter()
+        waiter(hold_seconds)
 
         # write to the output (stop the hold)
         self.bus.write_byte_data(self.address, OLATA, value_disable,)
