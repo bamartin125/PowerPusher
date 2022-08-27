@@ -113,7 +113,7 @@ class PowerPusher:
         async def power_off(self, *, index, hold_seconds=DEFAULT_POWER_OFF_SECONDS,):
             raise NotImplementedError()
 
-    class _SynchronousResetterSession(_ResetterSession):
+    class _SynchronousSession(_Session):
         def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             return self._pusher.power_on(
                 index=index,
