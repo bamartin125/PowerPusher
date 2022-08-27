@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-power-pusher = "power_pusher:main"
+power-pusher = "power_pusher:cli"
 
 [tool.flit.module]
 name = "power_pusher"
