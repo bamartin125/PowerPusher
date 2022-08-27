@@ -264,9 +264,5 @@ def cli_power_off(index, hold_seconds):
     )
 
 
-def main():
-    cli()
-
-
 if __name__ == '__main__':
     cli()
