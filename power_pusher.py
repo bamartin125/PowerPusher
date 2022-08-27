@@ -239,7 +239,7 @@ def power_off(*, index, hold_seconds=DEFAULT_POWER_OFF_SECONDS,):
 @click.group()
 @click.option(
     '--log-level',
-    type=lambda l: l.upper()
+    type=lambda l: l.upper(),
     default='ERROR',
 )
 def cli(log_level):
