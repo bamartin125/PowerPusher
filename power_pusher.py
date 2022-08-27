@@ -86,6 +86,15 @@ class PowerPusher:
                    # VAL: 0, 0, 0, 0, 0, 0, 0, 0
         )
 
+        # enable first 4 GPA pullups
+        self.bus.write_byte_data(
+            self.address,
+            GPPUA,
+            0x0F,  # GPA: 7, 6, 5, 4, 3, 2, 1, 0
+                   # VAL: 0, 0, 0, 0, 1, 1, 1, 1
+                   # ENB: F, F, F, F, T, T, T, T
+        )
+
         # set first 4 GPA ports to outputs, rest to inputs
         self.bus.write_byte_data(
             self.address,
