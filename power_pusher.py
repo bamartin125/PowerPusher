@@ -1,6 +1,7 @@
 from smbus2 import SMBus
 import click
 import time
+import logging
 
 
 DEFAULT_POWER_ON_SECONDS = 0.5
@@ -142,28 +143,40 @@ class PowerPusher:
         # get original value
         value0 = self.bus.read_byte_data(self.address, OLATA)
 
+        logger = logging.getLogger('PowerPusher._power_hold')
+
+        logger.debug("value0 = %r", value0)
+
         if index in range(3):
             bitmask = index + 1
-
         elif index in (3, 4):
             bitmask = 0x01 << (index - 1)
-
         else:
             raise ValueError(f'%r is an invalid index')
+
+        logger.debug("bitmask = %r", bitmask)
 
         # calculate the appropriate bits for "enable"
         value_enable = (value0 | bitmask)
         # calculate the appropriate bits for "disable"
         value_disable = (value0 & ~bitmask)
 
+        logger.debug("value_enable = %r", value_enable)
+        logger.debug("value_disable = %r", value_disable)
+
         # write to the output (start the hold)
+        logger.debug("enabling")
         self.bus.write_byte_data(self.address, OLATA, value_enable,)
 
         # call the waiter while we hold down
+        logger.debug("waiting")
         waiter(hold_seconds)
 
         # write to the output (stop the hold)
+        logger.debug("disabling")
         self.bus.write_byte_data(self.address, OLATA, value_disable,)
+
+        logger.debug("done")
 
     def power_hold(self, *, index, hold_seconds,):
         self._power_hold(
@@ -212,7 +225,7 @@ def power_off(*, index, hold_seconds=DEFAULT_POWER_OFF_SECONDS,):
 
 @click.group()
 def cli():
-    pass
+    logging.basicConfig(level='DEBUG')
 
 
 @cli.command('power-hold')
