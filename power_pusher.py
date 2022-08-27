@@ -142,7 +142,7 @@ class PowerPusher:
         value0 = self.bus.read_byte_data(self.address, OLATA)
 
         if index in range(3):
-            pass
+            bitmask = index + 1
 
         elif index in (3, 4):
             bitmask = 0x01 << (index - 1)
