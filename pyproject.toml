@@ -1,0 +1,23 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "power-pusher"
+version = "1.0.0"
+description = "holds power buttons through GPIO"
+authors = [
+    {name = "Brock A. Martin", email = "bamartin125@gmail.com"},
+]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "smbus2",
+    "click",
+]
+
+[project.scripts]
+power-pusher = "power_pusher:main"
+
+[tool.flit.module]
+name = "power_pusher"
