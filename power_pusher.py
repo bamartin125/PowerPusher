@@ -106,14 +106,14 @@ class PowerPusher:
         def __init__(self, pusher):
             self._pusher = pusher
 
-    class _AsynchronousSession(PowerPusher._Session):
+    class _AsynchronousSession(_Session):
         async def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             raise NotImplementedError()
 
         async def power_off(self, *, index, hold_seconds=DEFAULT_POWER_OFF_SECONDS,):
             raise NotImplementedError()
 
-    class _SynchronousSession(PowerPusher._Session):
+    class _SynchronousSession(_Session):
         def power_on(self, *, index, hold_seconds=DEFAULT_POWER_ON_SECONDS,):
             return self._pusher.power_on(
                 index=index,
