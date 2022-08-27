@@ -219,11 +219,13 @@ def cli():
     '--index',
     type=int,
     help='index for which to hold power',
+    required=True,
 )
 @click.option(
     '--hold-seconds',
     type=float,
-    help='how many seconds to "hold the power button down"',
+    help='how many seconds to "hold the power button down"',A
+    required=True,
 )
 def cli_power_hold(index, hold_seconds):
     power_hold(
@@ -237,6 +239,7 @@ def cli_power_hold(index, hold_seconds):
     '--index',
     type=int,
     help='index for which to hold power',
+    required=True,
 )
 @click.option(
     '--hold-seconds',
@@ -256,6 +259,7 @@ def cli_power_on(index, hold_seconds):
     '--index',
     type=int,
     help='index for which to hold power',
+    required=True,
 )
 @click.option(
     '--hold-seconds',
